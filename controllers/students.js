@@ -19,7 +19,6 @@ exports.createStudent = asyncHandler(async (req, res) => {
     email: req.body.email,
     preferredEsport: req.body.preferredEsport,
     gameName: req.body.gameName,
-    flag: null,
     adminMessages: [],
 		punches: []
   }
