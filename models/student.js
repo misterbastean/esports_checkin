@@ -41,20 +41,7 @@ const studentSchema = new mongoose.Schema({
 		dateAdded: Date,
 		message: String
 	}],
-	punches: [{
-		rawDate: Date,
-		date: {
-			type: Date,
-			default: Date.now
-		},
-		time: String,
-		type: String,
-		computer: Number
-	}],
-	createdAt: {
-		type: Date,
-		default: Date.now
-	}
+	punches: [{}]
 });
 
 module.exports = mongoose.model('Student', studentSchema);
