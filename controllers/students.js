@@ -50,6 +50,22 @@ exports.createStudent = asyncHandler(async (req, res, next) => {
     );
   })
   console.log(data)
+})
 
+exports.updateStudent = asyncHandler(async (req, res, next) => {
+  const data = await Student.findOneAndUpdate({studentId: req.params.id}, req.body, {
+    new: true,
+    runValidators: true
+  })
 
+  if (!data) {
+    return next(
+      new ErrorResponse(`Student not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    data
+  })
 })
