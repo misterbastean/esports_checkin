@@ -2,6 +2,7 @@ const express = require("express");
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 const config = require('./config')
+const errorHandler = require("./middleware/errorHandler")
 
 const server = express();
 const client = express();
@@ -31,6 +32,9 @@ const apiRoutes = require('./routes/api')
 // Use routes
 client.use(indexRoutes)
 server.use("/api/v1/", apiRoutes)
+
+// Use middleware
+server.use(errorHandler)
 
 
 // Listen
