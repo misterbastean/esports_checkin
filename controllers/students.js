@@ -69,3 +69,18 @@ exports.updateStudent = asyncHandler(async (req, res, next) => {
     data
   })
 })
+
+exports.deleteStudent = asyncHandler(async (req, res, next) => {
+  const data = await Student.deleteOne({studentId: req.params.id})
+
+  if (!data) {
+    return next(
+      new ErrorResponse(`Student not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    data: {}
+  })
+})
