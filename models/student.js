@@ -25,6 +25,7 @@ const studentSchema = new mongoose.Schema({
 	preferredEsport: {
 		type: String,
 		required: [true, "Please add a preferred eSport."],
+		enum: ["lol", "overwatch", "hearthstone"]
 	},
 	gameName: {
 		type: String,
