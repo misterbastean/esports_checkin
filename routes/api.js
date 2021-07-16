@@ -1,8 +1,8 @@
 const express = require('express')
-const { getStudents, getStudent } = require('../controllers/students')
+const { getStudents, getStudent, createStudent } = require('../controllers/students')
 const router = express.Router()
 
-router.route("/students").get(getStudents)
+router.route("/students").get(getStudents).post(createStudent)
 
 router.route("/students/:id").get(getStudent)
 

@@ -1,3 +1,5 @@
+// TODO: Fix error handling in createStudent
+
 const Student = require('../models/student')
 const asyncHandler = require('../middleware/async')
 const ErrorResponse = require('../utils/errorResponse');
@@ -36,5 +38,18 @@ exports.createStudent = asyncHandler(async (req, res, next) => {
 		punches: []
   }
 
-  const data = await Student.create(newStudent)
+  await Student.create(newStudent)
+  .then((data) => {
+    res.status(201).json({
+      success: true,
+      data
+    })
+  }).catch((err) => {
+    return next(
+      new ErrorResponse(`Student with id of ${newStudent.studentId} already exists.`, 409)
+    );
+  })
+  console.log(data)
+
+
 })
