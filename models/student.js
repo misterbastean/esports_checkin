@@ -18,7 +18,42 @@ const studentSchema = new mongoose.Schema({
 		required: [true, "Please add a last name."],
 		maxlength: [19, "Last name must be less than 20 characters long"],
 	},
-	punches: [{}]
+	email: {
+		type: String,
+		required: [true, "Please add an email."],
+	},
+	preferredEsport: {
+		type: String,
+		required: [true, "Please add a preferred eSport."],
+	},
+	gameName: {
+		type: String,
+		required: [true, "Please add a main game name."],
+	},
+	flag: {
+		type: String,
+		enum: ['none', "yellow", "orange", "red"],
+		default: "none"
+	},
+	adminMessages: [{
+		adminName: String,
+		dateAdded: Date,
+		message: String
+	}],
+	punches: [{
+		rawDate: Date,
+		date: {
+			type: Date,
+			default: Date.now
+		},
+		time: String,
+		type: String,
+		computer: Number
+	}],
+	createdAt: {
+		type: Date,
+		default: Date.now
+	}
 });
 
 module.exports = mongoose.model('Student', studentSchema);
