@@ -30,7 +30,7 @@ const apiRoutes = require('./routes/api')
 
 // Use routes
 client.use(indexRoutes)
-server.use(apiRoutes)
+server.use("/api/v1/", apiRoutes)
 
 
 // Listen
