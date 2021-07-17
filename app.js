@@ -1,15 +1,16 @@
 const express = require("express");
+const cors = require('cors')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 const config = require('./config')
 const errorHandler = require("./middleware/errorHandler")
 
-const server = express();
-const client = express();
+const app = express();
 
 // API Config
-server.use(express.json())
-server.use(methodOverride('_method'))
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(methodOverride('_method'))
 mongoose.Promise = global.Promise;
 mongoose.connect(
 	`mongodb+srv://${config.database.username}:${config.database.password}@${
@@ -19,29 +20,23 @@ mongoose.connect(
 );
 
 // Client Config
-client.set('view engine', 'ejs')
-client.use(express.static('public'))
-client.use(methodOverride('_method'))
-
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
 
 
 // Import routes
-const indexRoutes = require('./routes/index')
+const clientRoutes = require('./routes/client')
 const apiRoutes = require('./routes/api')
 
 // Use routes
-client.use(indexRoutes)
-server.use("/api/v1/", apiRoutes)
+app.use(clientRoutes)
+app.use("/api/v1/", apiRoutes)
 
 // Use middleware
-server.use(errorHandler)
+app.use(errorHandler)
 
 
 // Listen
-server.listen(3001, () => {
-  console.log("API server listening on port 3001");
-})
-
-client.listen(3000, () => {
+app.listen(3000, () => {
   console.log("Client listening on port 3000");
 })

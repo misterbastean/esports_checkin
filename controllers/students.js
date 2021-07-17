@@ -27,6 +27,7 @@ exports.getStudent = asyncHandler(async (req, res, next) => {
 })
 
 exports.createStudent = asyncHandler(async (req, res, next) => {
+  console.log("req.body", req.body)
   const newStudent = {
     studentId: req.body.studentId,
 		firstName: req.body.firstName,
@@ -37,19 +38,10 @@ exports.createStudent = asyncHandler(async (req, res, next) => {
     adminMessages: [],
 		punches: []
   }
+  console.log("newStudent:", newStudent)
+  const data = await Student.create(newStudent)
 
-  await Student.create(newStudent)
-  .then((data) => {
-    res.status(201).json({
-      success: true,
-      data
-    })
-  }).catch((err) => {
-    return next(
-      new ErrorResponse(`Student with id of ${newStudent.studentId} already exists.`, 409)
-    );
-  })
-  console.log(data)
+  res.redirect("/")
 })
 
 exports.updateStudent = asyncHandler(async (req, res, next) => {

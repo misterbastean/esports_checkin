@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Coker eSports Check-In</title>
+      <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>New Student</h1>
+      </div>
+      <div class="col-12 text-center">
+        <p>Complete the form below to add a new student.</p>
+      </div>
+    </div>
+    <form action="/api/v1/students" method="POST">
+      <div class="form-group">
+        <label for="studentId">Student ID#</label>
+        <small class="form-text text-muted mb-2">SCAN the Student ID - do NOT type by hand!</small>
+        <input type="text" class="form-control" id="studentId" name="studentId" autofocus required>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" required>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="email">Coker Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Ex. first.last@coker.edu" required>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="gameName">Name in main game</label>
+            <input type="text" class="form-control" id="gameName" name="gameName" placeholder="Ex. Faker, Impact, etc." required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <select name="preferredEsport" class="form-group form-select custom-select" aria-label="Preferred eSport">
+          <option selected="true" disabled="disabled">Select one option below</option>
+          <option value="hearthstone">Hearthstone</option>
+          <option value="lol">League of Legends</option>
+          <option value="overwatch">Overwatch</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
