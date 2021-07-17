@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coker QL Check-In</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<div class="container">
+  <h1 class='show-title'><%= student.firstName %> <%= student.lastName %> Punches</h1>
+  <br />
+  <div class="row">
+    <div class="col-6 text-center"><h3 class='subtitle'>Total Time: <%= totalTime %> minutes</h3></div>
+    <div class="col-6 text-center"><h3 class='subtitle'>Month Time: <%= monthTime %> minutes</h3></div>
+  </div>
+<br />
+  <table class='table table-striped'>
+  <thead>
+    <tr>
+      <th scope='col'>Date</th>
+      <th scope='col'>Time</th>
+      <th scope='col'>In/Out</th>
+    </tr>
+  </thead>
+    <% student.punches.forEach((punch) => { %>
+    <tr>
+      <td><%= punch.date %></td>
+      <td><%= punch.time %></td>
+      <td><%= punch.type.charAt(0).toUpperCase() + punch.type.slice(1) %></td>
+    </tr>
+    <% }); %>
+  </table>
+  <a href='/' class='btn btn-block btn-primary btn-lg back-to-home-btn'>Back to Home Page</a>
+</div>
+
+
+<%- include('./partials/footer') %>

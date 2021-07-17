@@ -1,3 +1,7 @@
+/*
+Just finished initial pass on student show page. Likely has bugs, but need to finish new punch route to test
+*/
+
 const express = require("express");
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
