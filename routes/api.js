@@ -1,6 +1,6 @@
 const express = require('express')
 const { getStudents, getStudent, createStudent, updateStudent, deleteStudent } = require('../controllers/students_api')
-const { getPunches, createPunch } = require('../controllers/punches')
+const { getPunches, createPunch } = require('../controllers/punches_api')
 const router = express.Router()
 
 // Students

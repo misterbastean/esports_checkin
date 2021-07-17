@@ -27,7 +27,7 @@ exports.createPunch = asyncHandler(async (req, res, next) => {
     rawDate: new Date(),
     date: currentDate.format('M-D-YYYY'),
     time: currentDate.format('h:mm a'),
-    type: req.query.type
+    type: req.body.type
   }
 
   data.punches.push(newPunch)
