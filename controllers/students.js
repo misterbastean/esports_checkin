@@ -41,7 +41,10 @@ exports.createStudent = asyncHandler(async (req, res, next) => {
   console.log("newStudent:", newStudent)
   const data = await Student.create(newStudent)
 
-  res.redirect("/")
+  res.status(201).json({
+    success: true,
+    data
+  })
 })
 
 exports.updateStudent = asyncHandler(async (req, res, next) => {
