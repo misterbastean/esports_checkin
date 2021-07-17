@@ -20,9 +20,8 @@ exports.createPunch = asyncHandler(async (req, res, next) => {
     );
   }
 
-  const currentDate = moment()
-
   // Create new punch object
+  const currentDate = moment()
   const newPunch = {
     rawDate: new Date(),
     date: currentDate.format('M-D-YYYY'),
