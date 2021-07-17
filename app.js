@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require('cors')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 const config = require('./config')
