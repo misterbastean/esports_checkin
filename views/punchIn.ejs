@@ -1,11 +1,5 @@
-<html>
-<head>
-  <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Coker QL Check-In</title>
-      <link rel="stylesheet" href="/css/bootstrap.min.css">
-</head>
-<body>
+<%- include('./partials/header') %>
+<%- include('./partials/navbar') %>
 <div class="container">
   <br />
   <div class="row">
@@ -13,7 +7,7 @@
       <h1>Punch-In</h1>
     </div>
     <div class="col-12 text-center">
-      <p>Scan student ID into field below, then press Enter or click "Punch In" button.</p>
+      <p class="font-italic">Scan student ID into field below, select the computer they will be using, and then press Enter or click "Punch In" button.</p>
     </div>
   </div>
   <form action="/punches" method="POST">
