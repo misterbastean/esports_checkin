@@ -1,5 +1,7 @@
 /*
-Just finished initial pass on student show page. Likely has bugs, but need to finish new punch route to test
+Working on punches_api to set computer number - just finished first pass, needs testing.
+Recently finished initial pass on student show page. Likely has bugs, but need to finish new punch route to test
+
 */
 
 const express = require("express");
@@ -19,7 +21,7 @@ mongoose.connect(
 	`mongodb+srv://${config.database.username}:${config.database.password}@${
 		config.database.dbhost
 	}`,
-	{ useNewUrlParser: true, useUnifiedTopology: true }
+	{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 );
 
 // Client Config
