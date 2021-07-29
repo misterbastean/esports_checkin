@@ -1,3 +1,4 @@
+const moment = require('moment')
 const axios = require('axios')
 const Student = require('../models/student')
 const asyncHandler = require('../middleware/async')
@@ -32,5 +33,38 @@ exports.studentsCreate = (req, res) => {
 exports.studentsShow = asyncHandler(async (req, res, next) => {
   const student = await Student.findOne({studentId: req.params.id});
 
-  res.render("studentsShow", { student })
+  // Punch formatting for time
+  const punches = []
+  student.punches.forEach((punch) => {
+    const date = moment(punch.rawDate).format("M/DD/YY")
+    const time = moment(punch.rawDate).format("hh:mm A")
+
+    punches.push({
+      date,
+      time,
+      type: punch.type
+    })
+  });
+
+  // Total time
+  let totalTime = 0;
+  for (let i = 0; i < student.punches.length; i += 2) {
+    // Check types
+    if (student.punches[i].type === "in" && student.punches[i+1] !== undefined && student.punches[i+1].type === "out") {
+      const punchIn = student.punches[i].rawDate
+      const punchOut = student.punches[i+1].rawDate
+      const diffMinutes = Math.round((((punchOut - punchIn) % 86400000) % 3600000) / 60000);
+      totalTime += diffMinutes
+    } else if (student.punches[i].type === "in" && student.punches[i+1] === undefined) {  // Did not punch out
+      const punchIn = student.punches[i].rawDate
+      const punchOut = new Date()
+      const diffMinutes = Math.round((((punchOut - punchIn) % 86400000) % 3600000) / 60000);
+      totalTime += diffMinutes
+    } else {
+      // TODO: Add error handling
+      totalTime = "ERR"
+    }
+  }
+
+  res.render("studentsShow", { student, punches, totalTime })
 })
