@@ -1,6 +1,34 @@
 <%- include('./partials/header') %>
+  
 <%- include('./partials/navbar') %>
+<div class="container">
+  <h1>Students Show Placeholder</h1>
 
-<h1>Students Show Placeholder</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Flag</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% students.forEach((student) => { %>
+        <tr>
+          <td><%= student.firstName.charAt(0).toUpperCase() + student.firstName.slice(1) %> <%= student.lastName.charAt(0) %>.</td>
+          <% if (student.flag === "none") { %>
+            <td></td>
+          <% } else if (student.flag === "yellow") { %>
+            <td>yellow placeholder</td>
+          <% } else if (student.flag === "orange") { %>
+            <td>orange placeholder</td>
+          <% } else if (student.flag === "red") { %>
+            <td>red placeholder</td>
+          <% } %>
+        </tr>
+      <% }) %>
+
+    </tbody>
+  </table>
+</div>
 
 <%- include('./partials/footer') %>
