@@ -12,8 +12,7 @@
   <h1 class='show-title'><%= student.firstName %> <%= student.lastName %> Punches</h1>
   <br />
   <div class="row">
-    <div class="col-6 text-center"><h3 class='subtitle'>Total Time: ? minutes</h3></div>
-    <div class="col-6 text-center"><h3 class='subtitle'>Month Time: ? minutes</h3></div>
+    <div class="col-12 text-center"><h3 class='subtitle'>Total Time: <%= totalTime %> minutes</h3></div>
   </div>
 <br />
   <table class='table table-striped'>
@@ -24,7 +23,7 @@
       <th scope='col'>In/Out</th>
     </tr>
   </thead>
-    <% student.punches.forEach((punch) => { %>
+    <% punches.forEach((punch) => { %>
     <tr>
       <td><%= punch.date %></td>
       <td><%= punch.time %></td>
