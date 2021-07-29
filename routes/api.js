@@ -7,7 +7,6 @@ const router = express.Router()
 router.route("/students").get(getStudents).post(createStudent)
 router.route("/students/:id").get(getStudent).put(updateStudent).delete(deleteStudent)
 
-
 // Punches
 router.route("/students/:id/punches").get(getPunches).post(createPunch)
 module.exports = router;
