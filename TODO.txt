@@ -1,0 +1,14 @@
+PRIMARY
+- Authentication
+- Authorization
+
+SECONDARY
+- Add flash alerts for punches
+- Add additional flash alert for punches if students have flags
+- Admin can add messages to students
+- Email Logan on flagged login
+
+TERTIARY
+- Add ability for admins to modify punches
+- Add pagination to punches on student show page
+- Update client routes to only query API, not access DB directly (separation of concerns)
