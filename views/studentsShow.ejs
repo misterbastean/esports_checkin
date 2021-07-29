@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coker QL Check-In</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/styles.css">
-</head>
-<body>
+<%- include('./partials/header') %>
+<%- include('./partials/navbar') %>
 <div class="container">
-  <h1 class='show-title'><%= student.firstName %> <%= student.lastName %> Punches</h1>
-  <br />
+  <h1 class='mt-3 text-center'><%= student.firstName %> <%= student.lastName %> Punches</h1>
   <div class="row">
     <div class="col-12 text-center"><h3 class='subtitle'>Total Time: <%= totalTime %> minutes</h3></div>
   </div>
@@ -31,7 +22,6 @@
     </tr>
     <% }); %>
   </table>
-  <a href='/' class='btn btn-block btn-primary btn-lg back-to-home-btn'>Back to Home Page</a>
 </div>
 
 

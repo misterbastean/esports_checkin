@@ -1,25 +1,33 @@
 <%- include('./partials/header') %>
 <%- include('./partials/navbar') %>
-<div class="wrapper">
-  <h1 class='title'>Cobras Check-In System</h1>
-  <div class="all-button-wrapper">
-    <div class="punch-buttons-wrapper">
-      <a href='/in' class="no-text-dec">
-        <div class="punch-in punch-button">
-            Punch In
-        </div>
-      </a>
-      <a href='/out' class="no-text-dec">
-        <div class="punch-out punch-button">
-            Punch Out
-        </div>
+<div class="container">
+  <h1 class="display-2 text-center mt-4 mb-5">Cobras Check-In System</h1>
+
+  <div class="row">
+    <div class="col-5 mt-4">
+      <a class="btn btn-block btn-success mx-4 py-2" href="/in">
+        <h1 class="text-white display-3">
+          Punch In
+        </h1>
       </a>
     </div>
-    <div class="new-student-wrapper">
-      <a href='/students/new' class="no-text-dec">
-        <div class="new-student-button">
+    <div class="col-2">
+
+    </div>
+    <div class="col-5 my-4">
+      <a class="btn btn-block btn-danger mx-4 py-2" href="/out">
+        <h1 class="text-white display-3">
+          Punch Out
+        </h1>
+      </a>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-12">
+      <a class="btn btn-block btn-primary mx-4" href="/students/new">
+        <h1 class="text-white">
           New Student
-        </div>
+        </h1>
       </a>
     </div>
   </div>
