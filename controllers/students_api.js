@@ -27,7 +27,6 @@ exports.getStudent = asyncHandler(async (req, res, next) => {
 })
 
 exports.createStudent = asyncHandler(async (req, res, next) => {
-  console.log("req.body", req.body)
   const newStudent = {
     studentId: req.body.studentId,
 		firstName: req.body.firstName,
