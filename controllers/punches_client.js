@@ -13,7 +13,6 @@ exports.punchOut = (req, res) => {
 }
 
 exports.punchCreate = asyncHandler(async (req, res, next) => {
-  console.log("body:", req.body);
   const student = await Student.findOne({studentId: req.body.studentId})
   if (!student) {
     console.log(`Student with ID of ${req.body.studentId} not found.`)
@@ -22,7 +21,6 @@ exports.punchCreate = asyncHandler(async (req, res, next) => {
 
   axios.post(`http://localhost:3000/api/v1/students/${req.body.studentId}/punches`, req.body)
   .then((response) => {
-    console.log("response:", response);
     res.redirect("/")
   })
   .catch((err) => {
