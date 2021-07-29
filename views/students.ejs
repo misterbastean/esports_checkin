@@ -1,8 +1,8 @@
 <%- include('./partials/header') %>
-  
+
 <%- include('./partials/navbar') %>
 <div class="container">
-  <h1>Students Show Placeholder</h1>
+  <h1 class="my-4">eSports Athletes</h1>
 
   <table class="table table-striped">
     <thead>
@@ -14,7 +14,11 @@
     <tbody>
       <% students.forEach((student) => { %>
         <tr>
-          <td><%= student.firstName.charAt(0).toUpperCase() + student.firstName.slice(1) %> <%= student.lastName.charAt(0) %>.</td>
+          <td>
+            <a href="/students/<%= student.studentId %>">
+              <%= student.firstName.charAt(0).toUpperCase() + student.firstName.slice(1) %> <%= student.lastName.charAt(0) %>.
+            </a>
+          </td>
           <% if (student.flag === "none") { %>
             <td></td>
           <% } else if (student.flag === "yellow") { %>
