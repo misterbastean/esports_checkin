@@ -7,8 +7,13 @@ const express = require('express');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const expressSession = require('express-session');
+
 const config = require('./config');
 const errorHandler = require('./middleware/errorHandler');
+const User = require('./models/user');
 
 const app = express();
 
@@ -32,6 +37,14 @@ app.use(express.static('public'));
 // Import routes
 const clientRoutes = require('./routes/client');
 const apiRoutes = require('./routes/api');
+
+// Passport Config
+app.use(expressSession(config.expressSession));
+app.use(passport.initialize());
+app.use(passport.session()); // Allows persistent sessions
+passport.serializeUser(User.serializeUser()); // What data should be stored in session
+passport.deserializeUser(User.deserializeUser()); // Get user data from stored session
+passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 
 // Use routes
 app.use(clientRoutes);

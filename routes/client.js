@@ -8,19 +8,25 @@ const {
   studentsShow,
 } = require('../controllers/students_client');
 const { punchIn, punchOut, punchCreate } = require('../controllers/punches_client');
-const { protect } = require('../middleware/auth');
+const { showRegister, register, showLogin, login, logout } = require('../controllers/auth_client');
+const { isLoggedIn } = require('../middleware/isLoggedIn');
 
 // Landing page
 router.route('/').get(index);
 
 // Students
-router.route('/students').get(protect, students).post(studentsCreate);
+router.route('/students').get(students).post(studentsCreate);
 router.route('/students/new').get(studentsNew);
-router.route('/students/:id').get(protect, studentsShow);
+router.route('/students/:id').get(studentsShow);
 
 // Punches
 router.route('/in').get(punchIn);
 router.route('/out').get(punchOut);
 router.route('/punches').post(punchCreate);
+
+// Auth
+router.route('/register').get(showRegister).post(register);
+router.route('/login').get(showLogin).post(login);
+router.route('/logout').get(logout).post(logout);
 
 module.exports = router;
