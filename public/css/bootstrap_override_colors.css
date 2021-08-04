@@ -1,3 +1,8 @@
 .bg-primary {
   background-color: #003a69 !important;
 }
+
+.btn-orange {
+  background-color: #ff7f00 !important;
+  color: #fff;
+}

@@ -7,7 +7,6 @@ const {
   deleteStudent,
 } = require('../controllers/students_api');
 const { getPunches, createPunch } = require('../controllers/punches_api');
-const { register, login, getMe } = require('../controllers/auth_api');
 const router = express.Router();
 
 // Students
@@ -16,10 +15,5 @@ router.route('/students/:id').get(getStudent).put(updateStudent).delete(deleteSt
 
 // Punches
 router.route('/students/:id/punches').get(getPunches).post(createPunch);
-
-// Auth
-router.route('/register').post(register);
-router.route('/login').post(login);
-router.route('/me').get(getMe);
 
 module.exports = router;
