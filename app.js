@@ -1,6 +1,6 @@
 /*
-Working on punches_api to set computer number - just finished first pass, needs testing.
-Recently finished initial pass on student show page. Likely has bugs, but need to finish new punch route to test
+Working on student show page.
+Need to add authorization to all student routes
 */
 
 const express = require('express');
