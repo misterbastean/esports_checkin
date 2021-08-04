@@ -5,8 +5,10 @@ Recently finished initial pass on student show page. Likely has bugs, but need t
 
 const express = require('express');
 const dotenv = require('dotenv');
+const favicon = require('serve-favicon');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
@@ -18,6 +20,7 @@ const User = require('./models/user');
 
 const app = express();
 dotenv.config({ path: './config/config.env' });
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // API Config
 app.use(express.json());
