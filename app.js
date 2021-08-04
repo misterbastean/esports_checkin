@@ -4,6 +4,7 @@ Recently finished initial pass on student show page. Likely has bugs, but need t
 */
 
 const express = require('express');
+const dotenv = require('dotenv');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -11,21 +12,23 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
 
-const config = require('./config');
 const errorHandler = require('./middleware/errorHandler');
+const makeUserAvailable = require('./middleware/makeUserAvailable');
 const User = require('./models/user');
 
 const app = express();
+dotenv.config({ path: './config/config.env' });
 
 // API Config
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 mongoose.Promise = global.Promise;
-mongoose.connect(
-  `mongodb+srv://${config.database.username}:${config.database.password}@${config.database.dbhost}`,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-);
+mongoose.connect(process.env.DB_STRING, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 // Cookieparser config
 app.use(cookieParser());
@@ -39,19 +42,26 @@ const clientRoutes = require('./routes/client');
 const apiRoutes = require('./routes/api');
 
 // Passport Config
-app.use(expressSession(config.expressSession));
+app.use(
+  expressSession({
+    secret: process.env.ES_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session()); // Allows persistent sessions
 passport.serializeUser(User.serializeUser()); // What data should be stored in session
 passport.deserializeUser(User.deserializeUser()); // Get user data from stored session
 passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 
+// Use middleware
+app.use(errorHandler);
+app.use(makeUserAvailable);
+
 // Use routes
 app.use(clientRoutes);
 app.use('/api/v1/', apiRoutes);
-
-// Use middleware
-app.use(errorHandler);
 
 // Listen
 app.listen(3000, () => {
