@@ -1,0 +1,56 @@
+<%- include('./partials/header') %>
+<%- include('./partials/navbar') %>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>Edit Student</h1>
+      </div>
+    </div>
+    <form action="/students/<%= student.studentId %>?_method=PUT" method="POST">
+      <input type="hidden" id="studentId" name="studentId" value="<%= student.studentId %>">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" value="<%= student.firstName %>" required>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" value="<%= student.lastName %>" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="email">Coker Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= student.email %>" required>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="gameName">Name in main game</label>
+            <input type="text" class="form-control" id="gameName" name="gameName" value="<%= student.gameName %>" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="preferredEsport">Preferred Game</label>
+        <select name="preferredEsport" class="form-group form-select custom-select" aria-label="Preferred eSport">
+          <option value="hearthstone" <%= student.preferredEsport === 'hearthstone' ? 'selected' : '' %>>Hearthstone</option>
+          <option value="lol" <%= student.preferredEsport === "lol" ? 'selected' : '' %>>League of Legends</option>
+          <option value="overwatch" <%= student.preferredEsport === 'overwatch' ? 'selected' : '' %>>Overwatch</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="adminMessage">Message</label>
+        <textarea class="form-control" id="adminMessage" name="adminMessage" rows="3"><%= student.message %></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
+    </form>
+  </div>
+  <%- include('./partials/footer') %>

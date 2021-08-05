@@ -6,6 +6,8 @@ const {
   studentsNew,
   studentsCreate,
   studentsShow,
+  studentsEdit,
+  studentsUpdate,
 } = require('../controllers/students_client');
 const { punchIn, punchOut, punchCreate } = require('../controllers/punches_client');
 const { showRegister, register, showLogin, login, logout } = require('../controllers/auth_client');
@@ -17,7 +19,8 @@ router.route('/').get(index);
 // Students
 router.route('/students').get(isLoggedIn, students).post(studentsCreate);
 router.route('/students/new').get(studentsNew);
-router.route('/students/:id').get(isLoggedIn, studentsShow);
+router.route('/students/:id').get(isLoggedIn, studentsShow).put(isLoggedIn, studentsUpdate);
+router.route('/students/:id/edit').get(isLoggedIn, studentsEdit);
 
 // Punches
 router.route('/in').get(punchIn);

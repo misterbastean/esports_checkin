@@ -23,7 +23,6 @@ exports.studentsCreate = (req, res) => {
   axios
     .post('http://localhost:3000/api/v1/students', req.body)
     .then((response) => {
-      console.log('response:', response);
       res.redirect('/');
     })
     .catch((err) => {
@@ -75,3 +74,40 @@ exports.studentsShow = asyncHandler(async (req, res, next) => {
 
   res.render('studentsShow', { student, punches, totalTime });
 });
+
+exports.studentsEdit = async (req, res) => {
+  const student = await Student.findOne({ studentId: req.params.id });
+  res.render('studentsEdit', { student });
+};
+
+exports.studentsUpdate = (req, res) => {
+  // Create data object
+  const data = (({ studentId, firstName, lastName, email, preferredEsport, gameName }) => ({
+    studentId,
+    firstName,
+    lastName,
+    email,
+    preferredEsport,
+    gameName,
+  }))(req.body);
+
+  // Update message property
+  data.adminMessage = {
+    adminName: req.user.username,
+    dateUpdated: new Date(),
+    message: req.body.adminMessage,
+  };
+
+  // Send request to API
+  axios
+    .put(`http://localhost:3000/api/v1/students/${req.body.studentId}`, data)
+    .then((response) => {
+      req.flash('success', 'Student updated.');
+      res.redirect(`/students/${req.body.studentId}`);
+    })
+    .catch((err) => {
+      console.log('err:', err);
+      req.flash('error', err.message);
+      res.redirect(`/students/${req.body.studentId}`);
+    });
+};

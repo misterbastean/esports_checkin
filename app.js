@@ -19,6 +19,7 @@ const flash = require('connect-flash');
 
 const errorHandler = require('./middleware/errorHandler');
 const makeUserAvailable = require('./middleware/makeUserAvailable');
+const makeFlashAvailable = require('./middleware/makeFlashAvailable');
 const User = require('./models/user');
 
 const app = express();
@@ -65,6 +66,7 @@ passport.use(new LocalStrategy(User.authenticate())); // Use the local strategy
 // Use middleware
 app.use(errorHandler);
 app.use(makeUserAvailable);
+app.use(makeFlashAvailable);
 
 // Use routes
 app.use(clientRoutes);

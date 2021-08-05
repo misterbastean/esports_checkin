@@ -28,7 +28,11 @@
     <button type="button" id="flagRedBtn" name="flagRed" class="btn btn-danger btn-lg mx-3">Flag Red</button>
   </div>
   <div class="row mb-3">
-    <div class="col-12 text-center"><h3 class='subtitle'>Total Time: <%= totalTime %> minutes</h3></div>
+    <div class="col-12 text-center">
+      <h3 class='subtitle'>
+        Total Time: <%= Math.floor(totalTime / 60) %> hours <%= totalTime % 60 %> minutes
+      </h3>
+    </div>
   </div>
   <table class='table table-striped'>
   <thead>
@@ -47,6 +51,9 @@
     <% }); %>
   </table>
 </div>
+<a href="/students/<%= student.studentId %>/edit" class="studentShow_editBtn">
+  Edit
+</a>
 
 <script>const studentId = <%= student.studentId %></script>
 <script src="/js/studentsShow.js"></script>

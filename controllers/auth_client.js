@@ -6,14 +6,28 @@ exports.showRegister = (req, res) => {
 };
 
 exports.register = async (req, res) => {
+  if (req.body.password.length < 10) {
+    req.flash('error', 'Password must be at least 10 characters long.');
+    return res.redirect('/register');
+  }
+
   try {
-    const newUser = await User.register(new User(req.body), req.body.password);
+    const newUser = await User.register(new User(req.body), req.body.password).catch((err) => {
+      throw new Error(err.message);
+    });
+
     passport.authenticate('local')(req, res, () => {
+      req.flash('success', 'New coach registered.');
       res.redirect('/');
     });
   } catch (err) {
     console.log(err);
-    res.send(err);
+    if (err.message.startsWith('E11000')) {
+      req.flash('error', 'An account with that email address already exists.');
+    } else {
+      req.flash('error', err.message);
+    }
+    res.redirect('/register');
   }
 };
 
@@ -24,11 +38,14 @@ exports.showLogin = (req, res) => {
 exports.login = (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
+    successFlash: 'Logged in successfully',
     failureRedirect: '/login',
+    failureFlash: true,
   })(req, res, next);
 };
 
 exports.logout = (req, res) => {
   req.logout();
+  req.flash('success', 'Logged out successfully');
   res.redirect('/');
 };

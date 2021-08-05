@@ -34,7 +34,7 @@ exports.createStudent = asyncHandler(async (req, res, next) => {
     email: req.body.email,
     preferredEsport: req.body.preferredEsport,
     gameName: req.body.gameName,
-    adminMessages: [],
+    adminMessage: {},
     punches: [],
   };
   const data = await Student.create(newStudent);

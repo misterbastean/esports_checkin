@@ -3,10 +3,12 @@ PRIMARY
 - DONE Authorization
 
 SECONDARY
-- Add flash alerts for punches
-- Add additional flash alert for punches if students have flags
+- DONE Add flash alerts for punches
+- DONE Add additional flash alert for punches if students have flags
 - Admin can add messages to students
 - Email Logan on flagged login
+- Double check password on coach registration prior to saving
+- Set time for missed punches to $now if time is less than X hours
 
 TERTIARY
 - Add ability for admins to modify punches
