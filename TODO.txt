@@ -1,6 +1,6 @@
 PRIMARY
-- Authentication
-- Authorization
+- DONE Authentication
+- DONE Authorization
 
 SECONDARY
 - Add flash alerts for punches

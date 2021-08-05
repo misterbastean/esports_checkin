@@ -1,6 +1,8 @@
 /*
 Working on student show page.
 Need to add authorization to all student routes
+Then add flash messages to punches, login, etc
+Then add email notifications on flagged punches
 */
 
 const express = require('express');
@@ -13,6 +15,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const expressSession = require('express-session');
+const flash = require('connect-flash');
 
 const errorHandler = require('./middleware/errorHandler');
 const makeUserAvailable = require('./middleware/makeUserAvailable');
@@ -37,6 +40,7 @@ mongoose.connect(process.env.DB_STRING, {
 app.use(cookieParser());
 
 // Client Config
+app.use(flash());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 

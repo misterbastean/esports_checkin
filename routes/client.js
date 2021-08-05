@@ -15,9 +15,9 @@ const { isLoggedIn } = require('../middleware/isLoggedIn');
 router.route('/').get(index);
 
 // Students
-router.route('/students').get(students).post(studentsCreate);
+router.route('/students').get(isLoggedIn, students).post(studentsCreate);
 router.route('/students/new').get(studentsNew);
-router.route('/students/:id').get(studentsShow);
+router.route('/students/:id').get(isLoggedIn, studentsShow);
 
 // Punches
 router.route('/in').get(punchIn);
