@@ -11,6 +11,11 @@ exports.register = async (req, res) => {
     return res.redirect('/register');
   }
 
+  if (req.body.password !== req.body.confirmPassword) {
+    req.flash('error', 'Passwords did not match.');
+    return res.redirect('/register');
+  }
+
   try {
     const newUser = await User.register(new User(req.body), req.body.password).catch((err) => {
       throw new Error(err.message);

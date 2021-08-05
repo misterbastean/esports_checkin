@@ -30,9 +30,17 @@ exports.createPunch = asyncHandler(async (req, res, next) => {
 
     // Adjust time to 2 hours before or after, depending on type
     if (req.body.type === 'in') {
-      extraPunchTime.setHours(extraPunchTime.getHours() + 2);
+      if (false) {
+        // If last punch time + 2 hours < current time
+      } else {
+        extraPunchTime.setHours(extraPunchTime.getHours() + 2);
+      }
     } else if (req.body.type === 'out') {
-      extraPunchTime.setHours(extraPunchTime.getHours() - 2);
+      if (false) {
+        // If last punch time - 2 hours < current time
+      } else {
+        extraPunchTime.setHours(extraPunchTime.getHours() - 2);
+      }
     } else {
       throw new Error('Error adjusting time for make-up punch');
     }
