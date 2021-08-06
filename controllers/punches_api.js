@@ -29,18 +29,27 @@ exports.createPunch = asyncHandler(async (req, res, next) => {
     let extraPunchTime = student.punches[student.punches.length - 1].rawDate;
 
     // Adjust time to 2 hours before or after, depending on type
+    // const previousTime = new Date(student.punches[student.punches.length - 1].rawDate);
+    // const now = new Date();
+    // const res = Math.abs(previousTime - now) / 1000;
+    // const differenceInMinutes = Math.floor(res / 60) % 60;
+    const differenceInMinutes =
+      Math.floor(
+        Math.abs(new Date(student.punches[student.punches.length - 1].rawDate) - new Date()) /
+          1000 /
+          60
+      ) % 60;
+    console.log('differenceInMinutes:', differenceInMinutes);
+
     if (req.body.type === 'in') {
-      if (false) {
-        // If last punch time + 2 hours < current time
+      // If last punch time + 2 hours < current time
+      if (differenceInMinutes < 120) {
+        extraPunchTime = new Date();
       } else {
         extraPunchTime.setHours(extraPunchTime.getHours() + 2);
       }
     } else if (req.body.type === 'out') {
-      if (false) {
-        // If last punch time - 2 hours < current time
-      } else {
-        extraPunchTime.setHours(extraPunchTime.getHours() - 2);
-      }
+      extraPunchTime.setHours(extraPunchTime.getHours() - 2);
     } else {
       throw new Error('Error adjusting time for make-up punch');
     }
