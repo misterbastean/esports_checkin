@@ -1,6 +1,7 @@
 const Student = require('../models/student');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
+const sendEmail = require('../utils/sendEmail');
 
 exports.getPunches = asyncHandler(async (req, res, next) => {
   const data = await Student.find().select('punches').exec();
@@ -17,7 +18,12 @@ exports.createPunch = asyncHandler(async (req, res, next) => {
   if (!student) {
     return next(new ErrorResponse(`Student not found with id of ${req.params.id}`, 404));
   }
-
+  // Check if student is flagged, and send email if so
+  if (['yellow', 'orange', 'red'].indexOf(student.flag) > -1) {
+    console.log(`student is flagged ${student.flag}`);
+    const studentName = `${student.firstName} ${student.lastName[0]}.`;
+    sendEmail(studentName, student.flag, req.body.type);
+  }
   // Check if previous punch was opposite type (checking for missed punches)
   if (
     student.punches.length > 0 &&
@@ -39,7 +45,6 @@ exports.createPunch = asyncHandler(async (req, res, next) => {
           1000 /
           60
       ) % 60;
-    console.log('differenceInMinutes:', differenceInMinutes);
 
     if (req.body.type === 'in') {
       // If last punch time + 2 hours < current time

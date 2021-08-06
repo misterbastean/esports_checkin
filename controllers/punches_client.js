@@ -24,7 +24,6 @@ exports.punchCreate = asyncHandler(async (req, res, next) => {
       return response.data;
     })
     .then((response) => {
-      console.log(response.flag);
       const date = new Date(response.data.rawDate);
       const dateOptions = { hour: 'numeric', minute: '2-digit' };
       const formattedDate = date.toLocaleDateString('en-US', dateOptions);

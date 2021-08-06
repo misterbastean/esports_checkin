@@ -35,6 +35,7 @@ mongoose.connect(process.env.DB_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: true,
 });
 
 // Cookieparser config

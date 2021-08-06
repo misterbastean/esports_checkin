@@ -6,7 +6,7 @@ SECONDARY
 - DONE Add flash alerts for punches
 - DONE Add additional flash alert for punches if students have flags
 - DONE Admin can add messages to students
-- Email Logan on flagged login
+- DONE Email Logan on flagged login (need to update credentials)
 - DONE Double check password on coach registration prior to saving
 - DONE Set time for missed punches to $now if time is less than X hours
 
