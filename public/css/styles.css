@@ -7,3 +7,16 @@
   padding: 0.8em 1.2em;
   border-radius: 10%;
 }
+
+/* Punch button sizing */
+@media (max-width: 992px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem !important;
+  }
+}
