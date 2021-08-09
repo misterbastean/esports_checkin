@@ -11,6 +11,6 @@ SECONDARY
 - DONE Set time for missed punches to $now if time is less than X hours
 
 TERTIARY
-- Add ability for admins to modify punches
+- Add ability for admins to modify missed punches (but not successful punches)
 - Add pagination to punches on student show page
 - Update client routes to only query API, not access DB directly (separation of concerns)
