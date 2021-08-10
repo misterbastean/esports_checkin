@@ -54,3 +54,11 @@ exports.logout = (req, res) => {
   req.flash('success', 'Logged out successfully');
   res.redirect('/');
 };
+
+exports.showResetPassword = (req, res) => {
+  res.render('resetPassword');
+};
+
+exports.resetPassword = (req, res) => {
+  res.send('reset password PUT route');
+};

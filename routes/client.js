@@ -10,7 +10,15 @@ const {
   studentsUpdate,
 } = require('../controllers/students_client');
 const { punchIn, punchOut, punchCreate } = require('../controllers/punches_client');
-const { showRegister, register, showLogin, login, logout } = require('../controllers/auth_client');
+const {
+  showRegister,
+  register,
+  showLogin,
+  login,
+  logout,
+  showResetPassword,
+  resetPassword,
+} = require('../controllers/auth_client');
 const { isLoggedIn } = require('../middleware/isLoggedIn');
 
 // Landing page
@@ -31,5 +39,6 @@ router.route('/punches').post(punchCreate);
 router.route('/register').get(showRegister).post(register);
 router.route('/login').get(showLogin).post(login);
 router.route('/logout').get(logout).post(logout);
+router.route('/reset').get(showResetPassword).put(resetPassword);
 
 module.exports = router;
