@@ -39,6 +39,6 @@ router.route('/punches').post(punchCreate);
 router.route('/register').get(showRegister).post(register);
 router.route('/login').get(showLogin).post(login);
 router.route('/logout').get(logout).post(logout);
-router.route('/reset').get(showResetPassword).put(resetPassword);
+router.route('/reset').get(isLoggedIn, showResetPassword).put(isLoggedIn, resetPassword);
 
 module.exports = router;

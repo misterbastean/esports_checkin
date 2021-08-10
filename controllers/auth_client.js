@@ -59,6 +59,27 @@ exports.showResetPassword = (req, res) => {
   res.render('resetPassword');
 };
 
-exports.resetPassword = (req, res) => {
-  res.send('reset password PUT route');
+exports.resetPassword = async (req, res) => {
+  // Verify new password and confirmation new password match
+  if (req.body.newPassword !== req.body.confirmNewPassword) {
+    req.flash('error', 'Password confirmation did not match.');
+    return res.redirect('/reset');
+  }
+  // Verify password matches and reset to new
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    req.flash('error', 'Error finding user.');
+    return res.redirect('/');
+  }
+  user
+    .changePassword(req.body.currentPassword, req.body.newPassword)
+    .then(() => {
+      req.flash('success', 'Password updated');
+      return res.redirect('/');
+    })
+    .catch((err) => {
+      console.log(err);
+      req.flash('error', err.message);
+      return res.redirect('/reset');
+    });
 };
